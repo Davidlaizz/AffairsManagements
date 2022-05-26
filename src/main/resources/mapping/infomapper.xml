@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pigeon.affairsmanagements.mapper.IInfoMapper">
+
+    <select id="getIndexUserInfo" parameterType="String" resultType="hashmap">
+        SELECT u.userName, u.userId, u.gender, m.majorName, college.collegeName
+        from (`user` u INNER JOIN major m ON u.majorId = m.majorId)
+                 inner join college on m.collegeId = college.collegeID
+        where u.userId=#{userId}
+    </select>
+
+    <select id="getTeacherCourseSchedule" parameterType="String" resultType="com.pigeon.affairsmanagements.entity.ScheduleDetail">
+        select course_schedule.courseId, c.courseName, course_schedule.courseDate
+        from course_schedule
+            inner join course c on course_schedule.courseId = c.courseId
+        where c.courseId = #{courseId}
+    </select>
+
+    <select id="queryUserInfo" parameterType="com.pigeon.affairsmanagements.entity.User" resultType="com.pigeon.affairsmanagements.entity.User">
+        select * from `user` where userName like concat('%',#{userName},'%') and userId like concat('%',#{userId},'%') and gender like concat('%',#{gender},'%') and phoneNumber like concat('%',#{phoneNumber},'%')
+        <if test="age!=null">
+            and age = #{age}
+        </if>
+    </select>
+
+    <delete id="deleteUser" parameterType="com.pigeon.affairsmanagements.entity.User" >
+        delete from `user` where userId = #{userId} ;
+    </delete>
+
+    <update id="updateUser" parameterType="com.pigeon.affairsmanagements.entity.User" >
+        update `user` set userName=#{userName}, age=#{age}, gender=#{gender}, phoneNumber=#{phoneNumber} where userId = #{userId}
+    </update>
+    
+
+</mapper>

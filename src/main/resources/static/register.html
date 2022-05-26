@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>成都理工大学教务管理系统</title>
+    <style>
+        html,body{
+	height: 100%;
+};
+    </style>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
+
+  </head>
+  <body>
+    <div class="container-fluid" style="width: 100%;height: 100%;position: absolute;z-index: -1;background-image:url(img/bg4.png) ;background-size: 100%,100%;" id="box">
+    </div>
+    <div class="container" style="position: absolute;z-index: 0;margin-top: 1.5%;background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.61) 46%, rgba(255, 255, 255, 0) 90%);width: 600px;">
+        <img src="img/logo.png"style="margin-left: 27px; width: auto; height: 60px;">
+    </div>
+    <div class="container" style="margin-right: 0;width: 30%;height:100%;backdrop-filter: blur(2px);background: rgba(255, 255, 255, 0.61);">
+
+        <form class="form-horizontal" role="form" style="margin-top: 40%;">
+            <h1 class="text-center" style="color: rgb(64,158,252);margin-top: 20%;">账号注册</h1>
+            </br>
+            <div class="form-group">
+              <div class="col-md-10 col-md-push-1">
+                <input type="text" class="form-control" id="name" placeholder="用户名" required="required">
+              </div>
+            </div>
+          </br>
+            <div class="form-group">
+              <div class="col-md-10 col-md-push-1">
+                <input type="password" class="form-control" id="password" placeholder="密码" required="required">
+              </div>
+            </div>
+        </br>
+            <div class="form-group">
+                <div class="col-md-10 col-md-push-1">
+                  <input type="password" class="form-control" id="repassword" placeholder="请重复输入密码" required="required">
+                </div>
+              </div>
+              <div class="col-md-10 col-md-push-1" style="display: none;" id="alert">
+                <p class="text-center" style="color: rgb(195, 17, 17);">两次密码输入不一致</p>
+           </div>
+          </br>
+              <button type="button" class="btn btn-primary btn-md col-md-10 col-md-push-1" id="register" onclick="user_register()">注册</button>
+          </form>
+
+        </br></br></br></br>
+          <div class="col-md-10 col-md-push-1">
+            <p class="text-center" ><a href="login.html">已有账号？点击登录</a></p>
+       </div>
+    </div>
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">警告</h5>
+          </div>
+          <div class="modal-body">
+            <h3 class="text-center" id="return_msg"></h3>
+            <p class="text-center"><img src="img/fail.jpg" class="img-circle"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function add(sentence){ 
+        $('#append').append(sentence);
+      };
+      function user_register(){
+        var id = $("#name").val();
+        var pass = $("#password").val();
+        var data = {
+          "userId":id,
+          "password":pass
+        };
+        var repass = $("#repassword").val();
+        if(pass==repass)
+        {
+          document.getElementById("alert").style.display="none";
+          $.ajax({
+           async:false,
+           type: 'POST',
+           url: '/v1/auth/register',
+           contentType: 'application/json;charset=utf-8',
+           data: JSON.stringify(data),
+           success: function(data_back){
+             if(data_back.code=="200")
+             {
+               $('#return_msg').html("账号创建成功");
+               $('#myModal').modal('show');
+             }else if(data_back.code=="233"){
+               $('#return_msg').html("用户已存在");
+               $('#myModal').modal('show');
+             }
+           },
+           error:function()
+           {
+             $('#return_msg').html("请检查网络情况！");
+             $('#myModal').modal('show');
+           }
+          });
+        }else{
+          document.getElementById("alert").style.display="block";
+        }
+        }
+    </script>
+
+    <script>
+            var i=1;//表示当前图片所在位置
+            var time = setTimeout("showImg()", 2000);//启动时钟事件刷新时间 1000==1秒
+            function icon_left(){
+                clearTimeout(time)//清除时钟事件
+                if(i<=1){
+                    i=4;
+                }else{
+                    i=i-2;
+                }
+                console.info(i)
+                showImg()
+            }
+            function icon_right(){
+                clearTimeout(time)//清除时钟事件
+                showImg()
+            }
+            function showImg() { //让背景图片显示
+                i++;
+                if(i == 4) {//5表示图片有5张1\2\3\4\5
+                    i = 1;
+                }
+                document.getElementById("box").style.background = "url( img/bg" + i + ".png) no-repeat";
+                document.getElementById("box").style.backgroundSize = "100%,100%";
+                //通过id获取标签并修改背景样式
+                time = setTimeout("showImg()", 10000);//启动时钟事件刷新时间 1000==1秒
+            }
+        </script>
+    
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

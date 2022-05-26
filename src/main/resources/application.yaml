@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    username: JavaExp
+    password: javaexp
+    url: jdbc:mysql://localhost:3306/teaching_affairs
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  web:
+    resources:
+      static-locations: classpath:/resources/,classpath:/static/,classpath:/templates/
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.pigeon.affairsmanagement.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

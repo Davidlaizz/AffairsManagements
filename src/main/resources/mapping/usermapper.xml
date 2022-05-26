@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pigeon.affairsmanagements.mapper.IUserMapper">
+    <select id="getPasswordByUserId" parameterType="String" resultType="String">
+        select password from user where userId = #{userName}
+    </select>
+
+    <select id="getUserNameByUserId" parameterType="String" resultType="String">
+        select userName from `user` where userId = #{userId}
+    </select>
+
+    <insert id="registerNewUser" parameterType="com.pigeon.affairsmanagements.entity.User">
+        insert into `user`(userId, userName, password, roleId) values(#{userId}, #{userId}, #{password},'02')
+    </insert>
+
+    <insert id="addNewUser" parameterType="com.pigeon.affairsmanagements.entity.User">
+        insert into `user`(userId, userName, password, gender, phoneNumber, age, roleId)
+        values(#{userId}, #{userName}, #{userId}, #{gender}, #{phoneNumber}, #{age}, '02' )
+    </insert>
+
+
+</mapper>
