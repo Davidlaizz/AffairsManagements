@@ -3,6 +3,7 @@ package com.pigeon.affairsmanagements.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pigeon.affairsmanagements.utils.Result;
 import com.pigeon.affairsmanagements.utils.Status;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.io.Writer;
 
+@Component
 public class IndexInterceptor implements HandlerInterceptor {
 
 

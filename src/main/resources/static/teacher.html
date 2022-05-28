@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>成都理工大学教务管理系统</title>
+    <style>
+      html,body
+      {
+        height: 100%;
+      }
+      .ziti{color: black;}
+      .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #000 !important;
+  }
+  #curriculum_first_line{
+  background-color: #c4cbcf;
+  }
+  #curriculum tr td:first-child{
+    background-color: #c4cbcf;
+  }
+    </style>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/main.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid" style="height: 100%;background-color: #d0dfe6;" id="div-0">
+      <div class="row" style="height: 5%;background-color: #8fb2c9;" id="div-1" >
+        <div class="col-md-2">
+          <img src="img/logo.png" style="width: auto;height:30px;" id="logo">
+        </div>
+        <div class="col-md-3 col-md-offset-7" style="height: 100%;">
+          <div class="btn-group pull-right" id="user_div">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="user_button" style="background-color:transparent">
+                <span id="top_name">未填写</span>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#" id="1" onclick="fun1(1)">个人中心</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="#" id="2" onclick="color()">主题设置</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="login.html">登出</a>
+                </li>
+            </ul>
+        </div>
+          
+        </div>
+      </div>
+      <div class="row" style="height: 95%;" id="div-2">
+        <div class="col-md-2 col-xs-2" style="height: 100%;background-color: #1a94bc;" id="div-2-1">
+        </br>
+		      <!-- 侧边栏标签页 -->
+		      <ul class="nav nav-pills nav-stacked">
+			      <!-- 侧边栏选项 -->
+			      <li role="presentation">
+				    <!-- 选项控制data-target对应的显隐 -->
+				      <a href="#" data-toggle="collapse" data-target="#list1" class="btn btn-primary" style="background-color:transparent" onclick="fun1(1)"><span class="ziti">首页</span></a>
+			      </li>
+            
+            <li role="presentation"><a href="#" id="3" onclick="fun1(2)" class="btn btn-primary" style="background-color:transparent"><span class="ziti">学籍信息系统</span></a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a href="#" id="4" onclick="fun1(3)" class="btn btn-primary" style="background-color:transparent"><span class="ziti">选课系统(老师)</span></a></li>
+		      </ul>
+        </div>
+
+
+        <div class="col-md-10 col-xs-10" style="height: 85%;background-color: #d0dfe6;" id="div-3">
+
+
+
+          <div class="col-md-12" style="height: 95%;display: block;" id="page1">
+            <div class="col-md-12" style="border-bottom:2px dashed #F00"></br></br><h1 class="text-center">个人中心</h1></br></div>
+            <div class="col-md-4 text-center" style="height: auto;border-right:2px dashed #F00">
+            </br></br></br>
+              <p><img src="img/user.png"></p>
+            <table class="table">
+              <tr><td>姓名：</td><td id="main_name">未填写</td></tr>
+              <tr><td>性别：</td><td id="main_gender">未填写</td></tr>
+              <tr><td>学号：</td><td id="main_id"></td></tr>
+              <tr><td>手机号：</td><td id="main_ph">未填写</td></tr>
+              <tr><td>年龄：</td><td id="main_age">未填写</td></tr>
+              <tr>
+                <td><button onclick="show_edit_modal_me()" class="btn btn-primary" style="width: 100px;">修改信息</button></td>
+                <td><button onclick="show_edit_modal_pass()" class="btn btn-primary" style="width: 100px;">修改密码</button></td>
+              </tr>
+            </table>
+            </div>
+            <div class="col-md-8" style="height: 100%;">
+            </br></br></br></br></br>
+            <table class="table table-bordered" id="curriculum">
+              <thead><h1 class="text-center">课程表</h1></thead>
+              <tr id="curriculum_first_line">
+                <td>节次/周</td>
+                <td>周一</td>
+                <td>周二</td>
+                <td>周三</td>
+                <td>周四</td>
+                <td>周五</td>
+                <td>周六</td>
+                <td>周日</td>
+              </tr>
+              <tr>
+                <td>第一节</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              </tr>
+              <tr>
+                <td>第二节</td><td>数据结构</td><td></td><td></td><td></td><td></td><td></td><td></td>
+              </tr>
+              <tr>
+                <td>中午</td><td></td><td>数据隐私保护</td><td></td><td></td><td></td><td></td><td></td>
+              </tr>
+              <tr>
+                <td>第三节</td><td></td><td></td><td></td><td></td><td>高等数学</td><td></td><td></td>
+              </tr>
+              <tr>
+                <td>第四节</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              </tr>
+              <tr>
+                <td>第五节</td><td></td><td></td><td>离散数学</td><td></td><td></td><td></td><td></td>
+              </tr>
+              
+              
+            </table>
+            </div>
+          </div>
+
+
+
+          <div class="col-md-12" style="height: 100%;display: none;" id="page2">
+            <div class="col-md-4" style="height: auto; position: relative;margin-top: 12%;border-right:2px dashed #F00">
+              <form class="form-horizontal" id="select_inf">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-3 control-label">姓名</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="find_name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-3 control-label">学号</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="find_id">
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">性别</label>
+                    <div class="col-sm-7">
+                      <select class="form-control" id="find_sex">
+                        <option value="0">男</option>
+                        <option value="1">女</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-3 control-label">电话号码</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="find_ph" placeholder="格式：xxx-xxxx-xxxx">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-3 control-label">年龄</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="find_age">
+                  </div>
+                </div>
+                <div class="form-group text-center">
+                 <button onclick="show_modal_add()" class="btn btn-primary" style="width: 100px;">新增</button>
+                 <button onclick="table_find()" class="btn btn-primary" style="width: 100px;">确定</button>
+                 <button class="btn btn-primary" style="width: 100px;" type="reset">清空</button>
+                </div>
+              </form>
+                </div>
+                <div class="col-md-8 table-responsive" style="height: 100%;position: relative;">
+                  <table class="table table-hover caption-top table-striped" id="students_find">
+                    <h1 class="text-center">学生信息表</h1>
+                    <thead>
+                      <tr>
+                        <th>姓名</th>
+                        <th>学号</th>
+                        <th>性别</th>
+                        <th>电话号码</th>
+                        <th>年龄</th>
+                        <th>设置</th>
+                      </tr>
+                    </thead>
+                    <tbody id="all_data">
+                      
+                    </tbody>
+                  </table>
+                </div>
+          </div>
+
+
+          <!-- 增加学生信息用的模态框 -->
+          <div class="modal fade" id="modal_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h1 class="modal-title" id="myModalLabel">
+                            添加学生信息
+                        </h1>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">姓名:</label>
+                          <input type="text" class="form-control" id="add_name" required="required">
+                        </div>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">学号:</label>
+                          <input type="text" class="form-control" id="add_id" required="required">
+                        </div>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">性别:</label>
+                          <select class="form-control" id="add_sex" required="required">
+                            <option value="0">男</option>
+                            <option value="1">女</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">电话号码:</label>
+                          <input type="text" class="form-control" id="add_ph" required="required" placeholder="格式：xxx-xxxx-xxxx">
+                        </div>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">年龄:</label>
+                          <input type="text" class="form-control" id="add_age" required="required">
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-primary" id="edit_all" onclick="data_add()">
+                            提交保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <!-- 修改学生信息用的模态框 -->
+          <div class="modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h1 class="modal-title" id="myModalLabel">
+                            修改学生信息
+                        </h1>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">姓名:</label>
+                          <input type="text" class="form-control" id="edit_name">
+                        </div>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">学号:</label>
+                          <input type="text" class="form-control" id="edit_id" readonly>
+                        </div>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">性别:</label>
+                          <select class="form-control" id="edit_sex">
+                            <option value="0">男</option>
+                            <option value="1">女</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">电话号码:</label>
+                          <input type="text" class="form-control" id="edit_ph" placeholder="格式：xxx-xxxx-xxxx">
+                        </div>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">年龄:</label>
+                          <input type="text" class="form-control" id="edit_age">
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-primary" id="edit_all" onclick="data_edit()">
+                            提交更改
+                        </button>
+                        <button type="button" class="btn btn-danger" id="edit_del" onclick="data_del()">
+                          删除
+                      </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 修改个人中心用的模态框 -->
+        <div class="modal fade" id="modal_edit_myself" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                          &times;
+                      </button>
+                      <h1 class="modal-title" id="myModalLabel">
+                          修改个人信息
+                      </h1>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">姓名:</label>
+                        <input type="text" class="form-control" id="edit_name_me">
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">学号:</label>
+                        <input type="text" class="form-control" id="edit_id_me" readonly>
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">性别:</label>
+                        <select class="form-control" id="edit_sex_me">
+                          <option value="0">男</option>
+                          <option value="1">女</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">电话号码:</label>
+                        <input type="text" class="form-control" id="edit_ph_me" placeholder="格式：xxx-xxxx-xxxx">
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">年龄:</label>
+                        <input type="text" class="form-control" id="edit_age_me">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                      </button>
+                      <button type="button" class="btn btn-primary" id="edit_all" onclick="edit_msg_me()">
+                          保存
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+        <!-- 修改密码用的模态框 -->
+        <div class="modal fade" id="modal_edit_pass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                          &times;
+                      </button>
+                      <h1 class="modal-title" id="myModalLabel">
+                          修改密码
+                      </h1>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">学号:</label>
+                        <input type="text" class="form-control" id="edit_id_me_p" readonly>
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">密码:</label>
+                        <input type="text" class="form-control" id="edit_pass" required="required">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                      </button>
+                      <button type="button" class="btn btn-primary" onclick="edit_pass()">
+                          保存
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+        <!-- 处理返回消息用的模态框 -->
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="modal_react">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="modal_title">警告</h5>
+              </div>
+              <div class="modal-body">
+                <h3 class="text-center" id="modal_msg"></h3>
+                <p class="text-center"><img src="img/fail.jpg" class="img-circle"></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!-- 修改背景颜色用的模态框 -->
+          <div class="modal fade" id="modal_edit_color" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h1 class="modal-title" id="myModalLabel">
+                            修改主题颜色
+                        </h1>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">主题选择:</label>
+                          <select class="form-control" id="edit_color">
+                            <option value="0">蓝天</option>
+                            <option value="1">草原</option>
+                            <option value="2">薰衣草</option>
+                            <option value="3">🦕</option>
+                          </select>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="edit_all" onclick="color_edit()">
+                            保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+          <div class="col-md-12" style="height: 100%;display: none;" id="page3">
+            <div class="col-md-8 col-md-offset-2" style="height: 100%;position: relative;">
+              <table class="table table-hover caption-top table-striped" id="class_find">
+                <h1 class="text-center">选课信息表</h1>
+                <thead>
+                  <tr>
+                    <th>课程</th>
+                    <th>设置</th>
+                  </tr>
+                </thead>
+                <tbody id="all_class_data">
+                  <tr id="class_1"><td>专业英语</td><td><button class="btn btn-primary" onclick="class_find(1)">查看</button></td></tr>
+                  <tr id="class_2"><td>操作系统</td><td><button class="btn btn-primary" onclick="class_find(2)">查看</button></td></tr>
+                  <tr id="class_3"><td>近世代数</td><td><button class="btn btn-primary" onclick="class_find(3)">查看</button></td></tr>
+                  <tr id="class_4"><td>普通地质学</td><td><button class="btn btn-primary" onclick="class_find(4)">查看</button></td></tr>
+                  <tr id="class_5"><td>信号与系统</td><td><button class="btn btn-primary" onclick="class_find(5)">查看</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        <!-- 老师选课用的模态框 -->
+        <div class="modal fade" id="modal_class_teacher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                          &times;
+                      </button>
+                      <h1 class="modal-title" id="class_name_choose"></h1>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table table-hover caption-top table-striped" id="class_find_T">
+                      <h1 class="text-center">选课信息表</h1>
+                      <thead>
+                        <tr>
+                          <th>姓名</th>
+                          <th>学号</th>
+                          <th>设置</th>
+                        </tr>
+                      </thead>
+                      <tbody id="class_students_data">
+                        <!-- <tr id="class_1"><td>吕凤骏</td><td>201917130114</td><td><button class="btn btn-danger" onclick="class_del_student(1)">删除</button></td></tr>
+                        <tr id="class_2"><td>丁真</td><td>201917130114</td><td><button class="btn btn-danger" onclick="class_del_student(2)">删除</button></td></tr>
+                        <tr id="class_3"><td>和世界</td><td>201917130115</td><td><button class="btn btn-danger" onclick="class_del_student(3)">删除</button></td></tr>
+                        <tr id="class_4"><td>怪林</td><td>201917130116</td><td><button class="btn btn-danger" onclick="class_del_student(4)">删除</button></td></tr>
+                        <tr id="class_5"><td>江</td><td>201917130114</td><td><button class="btn btn-danger" onclick="class_del_student(5)">删除</button></td></tr> -->
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -5,8 +5,10 @@ import com.pigeon.affairsmanagements.mapper.IUserMapper;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 
 @Service
 public class UserService {
@@ -16,18 +18,18 @@ public class UserService {
 
     public User findUserNameByUserId(String userId) throws Exception
     {
-        String userName = mapper.getUserNameByUserId(userId);
-        if(userName == null || userName.equals(""))
+        User res = mapper.getUserNameByUserId(userId);
+        if(res == null || res.getUserName().equals(""))
         {
             throw new Exception("Cannot find user!");
         }
-        return new User("",userName,"","","","",0,"","","");
+        return res;
     }
     public User findPasswordByUserId(String userId) throws Exception  {
-        String password = mapper.getPasswordByUserId(userId);
-        if(password==null)
+        User res = mapper.getPasswordByUserId(userId);
+        if(res==null)
             throw new Exception("User password wrong!");
-        return new User(userId, password);
+        return res;
 
     }
 
@@ -43,5 +45,26 @@ public class UserService {
     {
         int res = mapper.addNewUser(userInfo);
         return res != 0;
+    }
+
+    @Transactional
+    public boolean deleteUserInSelectCourse(User userInfo)
+    {
+        int res = mapper.deleteUserInSelectCourseTable(userInfo);
+        return res != 0;
+    }
+
+    @Transactional
+    public boolean addUserToSelectCourse(HashMap<String, String> userInfo)
+    {
+        var res = mapper.addUserToSelectCourseTable(userInfo);
+        return res != 0;
+    }
+
+    @Transactional
+    public boolean deleteUserFromSelectCourse(HashMap<String, String> userInfo)
+    {
+        var res = mapper.deleteUserFromSelectCourseTable(userInfo);
+        return  res != 0;
     }
 }

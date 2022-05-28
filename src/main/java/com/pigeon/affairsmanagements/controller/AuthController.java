@@ -15,7 +15,7 @@ import java.util.Map;
 @RequestMapping(value = "/v1/auth/")
 public class AuthController {
     @Resource
-    UserService uas = new UserService();
+    UserService userService = new UserService();
 
     @ResponseBody
     @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
@@ -27,20 +27,20 @@ public class AuthController {
 
         User user = null ;
         try {
-            user = uas.findUserNameByUserId(userId);
+            user = userService.findUserNameByUserId(userId);
 
         }catch(Exception e){
             e.printStackTrace();
             return new Result<String>(Status.USER_NOT_EXIST, Status.USER_NOT_EXIST.getMsg());
         }
         try {
-            user = uas.findPasswordByUserId(userId);
+            user = userService.findPasswordByUserId(userId);
             //Cookie cookie = new Cookie("user", DigestUtils.md5DigestAsHex(user.toString().getBytes(StandardCharsets.UTF_8)));
             //response.addCookie(cookie);
 
             if(user.getPassword().equals(password)){
                 httpSession.setAttribute("user",user.getUserId());
-                return new Result<String>(Status.SUCCESS, Status.SUCCESS.getMsg());
+                return new Result<String>(Status.SUCCESS, user.getRoleId(),"");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,11 +58,11 @@ public class AuthController {
     {
         try
         {
-            uas.findUserNameByUserId(userInfo.getUserId());
+            userService.findUserNameByUserId(userInfo.getUserId());
             return new Result<String>(Status.USER_HAS_EXISTED, "");
         } catch (Exception e) {
-            if(uas.registerUser(userInfo))
-                return new Result<String>(Status.SUCCESS    , "");
+            if(userService.registerUser(userInfo))
+                return new Result<String>(Status.SUCCESS, "");
             else
                 return new Result<String>(Status.ERROR,"");
         }
@@ -73,7 +73,7 @@ public class AuthController {
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Result<String> addStudentUser(@RequestBody User userInfo)
     {
-        if (uas.addStudentUser(userInfo)) {
+        if (userService.addStudentUser(userInfo)) {
 
             return new Result<String>(Status.SUCCESS, Status.SUCCESS.getMsg());
         }
@@ -81,6 +81,17 @@ public class AuthController {
         {
             return new Result<String>(Status.SUCCESS, Status.SUCCESS.getMsg());
         }
+    }
+
+    @PostMapping(value = "/logout", consumes = "application/json")
+    Result<String> logout(HttpSession session)
+    {
+        if(session.getAttribute("user")!= null)
+        {
+            session.setAttribute("user", null) ;
+            return new Result<String>(Status.SUCCESS, Status.SUCCESS.getMsg());
+        }
+        return new Result<String>(Status.ERROR, Status.ERROR.getMsg());
     }
 
 }

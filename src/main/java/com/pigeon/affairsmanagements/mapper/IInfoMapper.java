@@ -1,5 +1,6 @@
 package com.pigeon.affairsmanagements.mapper;
 
+import com.pigeon.affairsmanagements.entity.Course;
 import com.pigeon.affairsmanagements.entity.ScheduleDetail;
 import com.pigeon.affairsmanagements.entity.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,11 +14,17 @@ public interface IInfoMapper {
 
     ArrayList<ScheduleDetail> getTeacherCourseSchedule(String courseId);
 
-    ArrayList<User> queryUserInfo(User user);
+    ArrayList<User> fuzzyQueryUserInfo(User user);
 
-    void deleteUser(User user);
+    User getExactUserInfo(String userId);
 
-    // Integer addUser(User user);
+    // Get course id by posted course name
+    Course getCourseIdByName(Course courseInfo);
 
-    Integer updateUser(User user);
+    //Get user id list by querying select_course table
+    ArrayList<User> getStudentIdInSelectCourseTable(Course info);
+
+    // Get student selected course
+    ArrayList<Course> getStudentSelectedCourse(User userInfo);
+
 }

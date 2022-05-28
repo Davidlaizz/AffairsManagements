@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pigeon.affairsmanagements.mapper.IUserMapper">
-    <select id="getPasswordByUserId" parameterType="String" resultType="String">
-        select password from user where userId = #{userName}
+    <select id="getPasswordByUserId" parameterType="String" resultType="com.pigeon.affairsmanagements.entity.User">
+        select * from user where userId = #{userName}
     </select>
 
-    <select id="getUserNameByUserId" parameterType="String" resultType="String">
-        select userName from `user` where userId = #{userId}
+    <select id="getUserNameByUserId" parameterType="String" resultType="com.pigeon.affairsmanagements.entity.User">
+        select * from `user` where userId = #{userId}
     </select>
 
     <insert id="registerNewUser" parameterType="com.pigeon.affairsmanagements.entity.User">
@@ -17,6 +17,28 @@
         insert into `user`(userId, userName, password, gender, phoneNumber, age, roleId)
         values(#{userId}, #{userName}, #{userId}, #{gender}, #{phoneNumber}, #{age}, '02' )
     </insert>
+
+    <delete id="deleteUserInUserTable" parameterType="com.pigeon.affairsmanagements.entity.User" >
+        delete from `user` where userId = #{userId} ;
+    </delete>
+
+    <update id="updateUserInUserTable" parameterType="com.pigeon.affairsmanagements.entity.User" >
+        update `user` set userName=#{userName}, age=#{age}, gender=#{gender}, phoneNumber=#{phoneNumber}
+        where userId = #{userId}
+    </update>
+
+    <delete id="deleteUserInSelectCourseTable" parameterType="com.pigeon.affairsmanagements.entity.User">
+        delete from select_course where userId = #{userId}
+    </delete>
+
+    <insert id="addUserToSelectCourseTable" parameterType="hashmap">
+        insert into select_course(courseId, userId )
+        values(#{courseId}, #{userId})
+    </insert>
+
+    <delete id="deleteUserFromSelectCourseTable" parameterType="hashmap">
+        delete from select_course where userId = #{userId} and courseId = #{courseId}
+    </delete>
 
 
 </mapper>

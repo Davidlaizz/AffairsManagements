@@ -1,8 +1,10 @@
 package com.pigeon.affairsmanagements.service;
 
+import com.pigeon.affairsmanagements.entity.Course;
 import com.pigeon.affairsmanagements.entity.ScheduleDetail;
 import com.pigeon.affairsmanagements.entity.User;
 import com.pigeon.affairsmanagements.mapper.IInfoMapper;
+import com.pigeon.affairsmanagements.mapper.IUserMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,9 @@ public class InfoService {
 
     @Resource
     IInfoMapper infoMapper;
+
+    @Resource
+    IUserMapper userMapper;
     //获取首页用户信息
     public HashMap<String, Object> getIndexInfo(String userId)
     {
@@ -30,14 +35,14 @@ public class InfoService {
         return res;
     }
 
-    public ArrayList<User> queryUserInfo(User userFuzzyInfo)
+    public ArrayList<User> fuzzyQueryUserInfo(User userFuzzyInfo)
     {
-        return infoMapper.queryUserInfo(userFuzzyInfo);
+        return infoMapper.fuzzyQueryUserInfo(userFuzzyInfo);
     }
 
     public void deleteUser(User user)
     {
-        infoMapper.deleteUser(user);
+        userMapper.deleteUserInUserTable(user);
 
     }
 
@@ -45,6 +50,28 @@ public class InfoService {
     @Transactional
     public Integer updateUserInfo(User user)
     {
-        return infoMapper.updateUser(user);
+        return userMapper.updateUserInUserTable(user);
+    }
+
+    public User queryExactUserInfo(String userId)
+    {
+        return infoMapper.getExactUserInfo(userId);
+    }
+
+    public ArrayList<User> getStudentsInfoSelectCourse(Course courseName)
+    {
+        Course res = infoMapper.getCourseIdByName(courseName);
+        return  infoMapper.getStudentIdInSelectCourseTable(res);
+
+    }
+
+    public ArrayList<Course> getCourseInfoSelectedByStudent(User userInfo)
+    {
+        return infoMapper.getStudentSelectedCourse(userInfo);
+    }
+
+    public Course getCourseIdByName(Course courseInfo)
+    {
+        return infoMapper.getCourseIdByName(courseInfo);
     }
 }

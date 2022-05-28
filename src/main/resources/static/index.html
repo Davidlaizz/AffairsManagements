@@ -32,17 +32,21 @@
     <div class="container-fluid" style="height: 100%;background-color: #d0dfe6;" id="div-0">
       <div class="row" style="height: 5%;background-color: #8fb2c9;" id="div-1" >
         <div class="col-md-2">
-          <img src="img/logo.png" style="width: auto;height:30px;">
+          <img src="img/logo.png" style="width: auto;height:30px;" id="logo">
         </div>
         <div class="col-md-3 col-md-offset-7" style="height: 100%;">
           <div class="btn-group pull-right" id="user_div">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="user_button">
-                <span id="top_name">admin</span>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="user_button" style="background-color:transparent">
+              <span id="top_name">未填写</span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu pull-right" role="menu">
                 <li>
-                    <a href="#" id="1" onclick="fun(event)">个人中心</a>
+                    <a href="#" id="1" onclick="fun(1)">个人中心</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="#" id="2" onclick="color()">主题设置</a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -54,32 +58,26 @@
         </div>
       </div>
       <div class="row" style="height: 95%;" id="div-2">
-        <div class="col-md-2 col-xs-2" style="height: 100%;background-color: #1a94bc;">
+        <div class="col-md-2 col-xs-2" style="height: 100%;background-color: #1a94bc;" id="div-2-1">
         </br>
 		      <!-- 侧边栏标签页 -->
 		      <ul class="nav nav-pills nav-stacked">
 			      <!-- 侧边栏选项 -->
 			      <li role="presentation">
 				    <!-- 选项控制data-target对应的显隐 -->
-				      <a href="#" data-toggle="collapse" data-target="#list1" class="btn btn-primary"><span class="ziti">教务管理</span></a>
-				      <!-- 隐藏的详细菜单 -->
-				      <ul id="list1" class="collapse in nav nav-pills nav-stacked">
-					     <li><a href="#" id="1" onclick="fun(1)" class="btn btn-primary"><span class="ziti">功能1</span></a></li>
-               <li class="divider"></li>
-					     <li><a href="#" id="2" onclick="fun(2)" class="btn btn-primary"><span class="ziti">功能2</span></a></li>
-				     </ul>
+				      <a href="#" data-toggle="collapse" data-target="#list1" class="btn btn-primary" style="background-color:transparent" onclick="fun(1)"><span class="ziti">首页</span></a>
 			      </li>
             
-            <li role="presentation"><a href="#" id="3" onclick="fun(3)" class="btn btn-primary"><span class="ziti">学籍信息系统</span></a></li>
+            <li role="presentation"><a href="#" id="3" onclick="fun(2)" class="btn btn-primary" style="background-color:transparent"><span class="ziti">学籍信息系统</span></a></li>
             <li role="presentation" class="divider"></li>
-            <li role="presentation"><a href="#" id="4" onclick="fun(4)" class="btn btn-primary"><span class="ziti">选课系统(老师)</span></a></li>
+            <li role="presentation"><a href="#" id="4" onclick="fun(3)" class="btn btn-primary" style="background-color:transparent"><span class="ziti">选课系统(老师)</span></a></li>
             <li role="presentation" class="divider"></li>
-            <li role="presentation"><a href="#" id="5" onclick="fun(5)" class="btn btn-primary"><span class="ziti">选课系统(学生)</span></a></li>
+            <li role="presentation"><a href="#" id="5" onclick="fun(4)" class="btn btn-primary" style="background-color:transparent"><span class="ziti">选课系统(学生)</span></a></li>
 		      </ul>
         </div>
 
 
-        <div class="col-md-10 col-xs-10" style="height: auto;background-color: #d0dfe6;" id="div-3">
+        <div class="col-md-10 col-xs-10" style="height: 85%;background-color: #d0dfe6;" id="div-3">
 
 
 
@@ -89,11 +87,11 @@
             </br></br></br>
               <p><img src="img/user.png"></p>
             <table class="table">
-              <tr><td>姓名：</td><td id="main_name">吕凤骏</td></tr>
-              <tr><td>性别：</td><td id="main_gender">女</td></tr>
-              <tr><td>学号：</td><td id="main_id">201917030117</td></tr>
-              <tr><td>手机号：</td><td id="main_ph">13000000000</td></tr>
-              <tr><td>年龄：</td><td id="main_age">24</td></tr>
+              <tr><td>姓名：</td><td id="main_name">未填写</td></tr>
+              <tr><td>性别：</td><td id="main_gender">未填写</td></tr>
+              <tr><td>学号：</td><td id="main_id"></td></tr>
+              <tr><td>手机号：</td><td id="main_ph">未填写</td></tr>
+              <tr><td>年龄：</td><td id="main_age">未填写</td></tr>
               <tr>
                 <td><button onclick="show_edit_modal_me()" class="btn btn-primary" style="width: 100px;">修改信息</button></td>
                 <td><button onclick="show_edit_modal_pass()" class="btn btn-primary" style="width: 100px;">修改密码</button></td>
@@ -140,14 +138,9 @@
 
 
 
-          <div class="col-md-12" style="background-color: #d0dfe6;height: 100%;display: none;" id="page2">
-            页面2
-          </div>
 
-
-
-          <div class="col-md-12" style="background-color: #d0dfe6;height: 100%;display: none;" id="page3">
-            <div class="col-md-4" style="height: 100%; position: relative;margin-top: 12%;border-right:2px dashed #F00">
+          <div class="col-md-12" style="height: 100%;display: none;" id="page2">
+            <div class="col-md-4" style="height: auto; position: relative;margin-top: 12%;border-right:2px dashed #F00">
           <form class="form-horizontal" id="select_inf">
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-3 control-label">姓名</label>
@@ -412,10 +405,43 @@
           </div>
         </div>
 
+          <!-- 修改背景颜色用的模态框 -->
+          <div class="modal fade" id="modal_edit_color" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h1 class="modal-title" id="myModalLabel">
+                            修改主题颜色
+                        </h1>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">主题选择:</label>
+                          <select class="form-control" id="edit_color">
+                            <option value="0">蓝天</option>
+                            <option value="1">草原</option>
+                            <option value="2">薰衣草</option>
+                            <option value="3">🦕</option>
+                          </select>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="edit_all" onclick="color_edit()">
+                            保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
-          <div class="col-md-12" style="background-color: rgb(223, 193, 22);height: 100%;display: none;" id="page4">
+          <div class="col-md-12" style="height: 100%;display: none;" id="page3">
             <div class="col-md-8 col-md-offset-2" style="height: 100%;position: relative;">
               <table class="table table-hover caption-top table-striped" id="class_find">
                 <h1 class="text-center">选课信息表</h1>
@@ -473,7 +499,7 @@
           </div>
       </div>
 
-          <div class="col-md-12" style="height: 100%;display: none;" id="page5">
+          <div class="col-md-12" style="height: 100%;display: none;" id="page4">
             <div class="col-md-8 col-md-offset-2" style="height: 100%;position: relative;">
               <table class="table table-hover caption-top table-striped" id="class_choose_student">
                 <h1 class="text-center">选课信息表</h1>
@@ -580,6 +606,11 @@
           function data_add() {
                  var name_a = $('#add_name').val();
                  var sex_a = $('#add_sex').val();
+                 if(sex_a==1){
+                    sex_a="女";
+                 }else if(sex_a==0){
+                  sex_a="男";
+                 }
                  var age_a = $('#add_age').val();
                  var ph_a = $('#add_ph').val();
                  var id_a = $('#add_id').val();
@@ -621,6 +652,11 @@
           function data_edit() {
                  var name_n = $('#edit_name').val();
                  var sex_n = $('#edit_sex').val();
+                 if(sex_n==1){
+                    sex_n="女";
+                 }else if(sex_n==0){
+                  sex_n="男";
+                 }
                  var age_n = $('#edit_age').val();
                  var ph_n = $('#edit_ph').val();
                  var id_n = $('#edit_id').val();
@@ -732,10 +768,11 @@
           contentType: 'application/json;charset=utf-8',
           success:function(datas){
             if(datas.msg="success"){
+            main_msg();
             $('#modal_title').html('通知');
             $('#modal_msg').html('修改成功');
             $('#modal_react').modal('show');
-            main_msg();
+            
             }else{
             $('#modal_title').html('警告');
             $('#modal_msg').html('修改失败，请联系管理员');
@@ -815,6 +852,7 @@
         }
        })
     };
+    //删除在课程中的学生
     function class_del_student(num){
       var stuid = $("#class_find_T").find('tr').eq(num).find('td').eq(1).text();
       data_d_S={
@@ -870,7 +908,7 @@
                 var string = "<button class=\"btn btn-primary\" onclick=\"class_choose("+i+")\" >选课</button>"
                 $('#class_choose_student').find('tr').eq(i).find('td').eq(1).html(string);
               }else if(magic[i]=="1"){
-                var string = "<button class=\"btn btn-danger\" onclick=\"class_choose("+i+")\" >退课</button>"
+                var string = "<button class=\"btn btn-danger\" onclick=\"class_del("+i+")\" >退课</button>"
                 $('#class_choose_student').find('tr').eq(i).find('td').eq(1).html(string);
               }
             }
@@ -911,6 +949,38 @@
             $('#modal_react').modal('show');
           }
         })
+      };
+          //学生退课
+          function class_del(num){
+        var class_name = $('#class_choose_student').find('tr').eq(num).find('td').eq(0).text();
+        var id = $('#main_id').html();
+        var data_class_name ={
+           'userId':id,
+           'className':class_name
+        } ;
+        $.ajax({
+          url:'v1/info/classDel',
+          type:'post',
+          contentType:'application/json;charset=utf-8',
+          data:JSON.stringify(data_class_name),
+          success:function(){
+            if(datas.msg=="success"){
+            $('#modal_title').html('通知');
+            $('#modal_msg').html('退课成功');
+            $('#modal_react').modal('show');
+            show_student_class();
+            }else{
+              $('#modal_title').html('警告');
+            $('#modal_msg').html('退课失败，请联系管理员');
+            $('#modal_react').modal('show');
+            }
+          },
+          error:function(){
+            $('#modal_title').html('警告');
+            $('#modal_msg').html('退课失败，请检查网络情况');
+            $('#modal_react').modal('show');
+          }
+        })
       }
     </script>
 
@@ -924,8 +994,8 @@
   </script>
     <script>//分区显示
       function fun(num){
-          if(num==5){show_student_class()}
-          for(i=1;i<=5;i++)
+          if(num==4){show_student_class()}
+          for(i=1;i<=4;i++)
           {
             page_id="page"+i;
             document.getElementById(page_id).style.display="none";
@@ -933,6 +1003,68 @@
           page_id = "page"+num;
           document.getElementById(page_id).style.display="block";
       }
+      //选择主题的背景
+      function color(){
+      $('#modal_edit_color').modal('show');
+      }
+
+      function color_edit(){
+        var color = $('#edit_color').val();
+        switch(color){
+          case '0':
+            $('#div-1').css('background-color','#8fb2c9');//顶部栏
+            $('#div-2-1').css('background-color','#1a94bc');//侧边栏
+            $('#logo').attr('src','img/logo.png')
+            $('#div-0').css('background-color','#d0dfe6');
+            $('#div-3').css('background-color','#d0dfe6');
+            break;
+          case '1':
+            $('#div-1').css('background-color','#9eccab');
+            $('#logo').attr('src','img/logo.png')
+            $('#div-0').css('background-color','#c6dfc8');
+            $('#div-2-1').css('background-color','#41b349');
+            $('#div-3').css('background-color','#c6dfc8');
+            break;
+          case '2':
+            $('#div-1').css('background-color','#131124');//顶部栏
+            $('#logo').attr('src','img/logo2.png')
+            $('#div-2-1').css('background-color','#74759b');//侧边栏
+            $('#div-0').css('background-color','#ccccd6');
+            $('#div-3').css('background-color','#ccccd6');
+            break;
+          case '3':
+            $('#div-1').css('background-color','');//顶部栏
+            $('#logo').attr('src','img/logo.png')
+            $('#div-2-1').css('background-color','');//侧边栏
+            $('#div-0').css('background-color','');
+            $('#div-3').css({
+              'background-color':'white',
+              'border':'1px solid #000',
+              '-moz-border-radius':'10px',
+              '-webkit-border-radius':'10px',
+          
+          });
+            var css_body = {
+ 	               'background-image':'url("img/bg6.png")',
+  	             'background-position': 'center 0',
+                	'background-repeat': 'no-repeat',
+                	'background-attachment': 'fixed',
+                	'background-size': 'cover',
+                	'-webkit-background-size': 'cover',
+                	'-o-background-size': 'cover',
+                	'-moz-background-size': 'cover',
+               	  '-ms-background-size': 'cover',
+                 };
+            var css_div_3 = {
+ 	               'background-image':'url("img/bg11.png") no-repeat',
+                	'background-size': 'cover',
+                 };
+            $('body').css(css_body);
+            $('#div-3').css(css_div_3);
+            break;
+        }
+      }
+
     </script>
 
   </body>

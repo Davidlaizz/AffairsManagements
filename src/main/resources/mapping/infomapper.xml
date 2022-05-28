@@ -3,10 +3,10 @@
 <mapper namespace="com.pigeon.affairsmanagements.mapper.IInfoMapper">
 
     <select id="getIndexUserInfo" parameterType="String" resultType="hashmap">
-        SELECT u.userName, u.userId, u.gender, m.majorName, college.collegeName
+        SELECT u.userName, u.userId, u.gender, u.phoneNumber, u.age
         from (`user` u INNER JOIN major m ON u.majorId = m.majorId)
                  inner join college on m.collegeId = college.collegeID
-        where u.userId=#{userId}
+        where u.userId = #{userId}
     </select>
 
     <select id="getTeacherCourseSchedule" parameterType="String" resultType="com.pigeon.affairsmanagements.entity.ScheduleDetail">
@@ -16,20 +16,34 @@
         where c.courseId = #{courseId}
     </select>
 
-    <select id="queryUserInfo" parameterType="com.pigeon.affairsmanagements.entity.User" resultType="com.pigeon.affairsmanagements.entity.User">
-        select * from `user` where userName like concat('%',#{userName},'%') and userId like concat('%',#{userId},'%') and gender like concat('%',#{gender},'%') and phoneNumber like concat('%',#{phoneNumber},'%')
+    <select id="fuzzyQueryUserInfo" parameterType="com.pigeon.affairsmanagements.entity.User" resultType="com.pigeon.affairsmanagements.entity.User">
+        select * from `user`
+        where userName like concat('%',#{userName},'%') and userId like concat('%',#{userId},'%')
+          and gender like concat('%',#{gender},'%') and phoneNumber like concat('%',#{phoneNumber},'%') and roleId = '02'
         <if test="age!=null">
             and age = #{age}
         </if>
     </select>
 
-    <delete id="deleteUser" parameterType="com.pigeon.affairsmanagements.entity.User" >
-        delete from `user` where userId = #{userId} ;
-    </delete>
+    <select id="getExactUserInfo" parameterType="String" resultType="com.pigeon.affairsmanagements.entity.User">
+        select * from `user`
+        where userId = #{userId}
+    </select>
 
-    <update id="updateUser" parameterType="com.pigeon.affairsmanagements.entity.User" >
-        update `user` set userName=#{userName}, age=#{age}, gender=#{gender}, phoneNumber=#{phoneNumber} where userId = #{userId}
-    </update>
-    
+    <select id="getCourseIdByName" parameterType="com.pigeon.affairsmanagements.entity.Course" resultType="com.pigeon.affairsmanagements.entity.Course">
+        select * from course where courseName = #{courseName}
+    </select>
+
+    <select id="getStudentIdInSelectCourseTable" parameterType="com.pigeon.affairsmanagements.entity.Course" resultType="com.pigeon.affairsmanagements.entity.User">
+        select u.userName, u.userId from `user` u
+        inner join select_course sc on u.userId = sc.userID
+        where sc.courseId = #{courseId};
+    </select>
+
+    <select id="getStudentSelectedCourse" parameterType="com.pigeon.affairsmanagements.entity.User" resultType="com.pigeon.affairsmanagements.entity.Course">
+        select c.* from course c
+        inner join select_course sc on c.courseId = sc.courseId
+        where sc.userId = #{userId}
+    </select>
 
 </mapper>
